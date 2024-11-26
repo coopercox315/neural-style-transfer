@@ -23,9 +23,33 @@ class VGG19(nn.Module):
     def forward(self, x):
         return self.model(x)
     
+def gram_matrix(tensor):
+    """
+    Compute the Gram matrix of a given input tensor.
+    Args:
+    - input (Tensor): the input tensor.
+    
+    Returns:
+    - Tensor: the Gram matrix of the input tensor.
+    """
+    #Get the batch size, number of channels, height, and width of the input tensor
+    b, c, h, w = tensor.size()
+    
+    #Reshape the input tensor to be a 2D matrix
+    features = tensor.view(b * c, h * w)
+    
+    #Compute the Gram matrix
+    g_mat = torch.mm(features, features.t())
+    
+    #return the normalized Gram matrix
+    return g_mat.div(b * c * h * w)
+    
+    
 def run_style_transfer(content_path, style_path, output_path, num_steps=300, content_weight=1, style_weight = 1e6):
     """
     Run the style transfer process with the given content and style images.
+    The ratio of content_weight to style_weight determines the balance between
+    the two losses and affects how much the output image will be stylized.
     Args:
     - content_path (str): path to the content image.
     - style_path (str): path to the style image.
