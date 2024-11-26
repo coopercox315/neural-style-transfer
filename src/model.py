@@ -44,6 +44,22 @@ def gram_matrix(tensor):
     #return the normalized Gram matrix
     return g_mat.div(b * c * h * w)
     
+class ContentLoss(nn.Module):
+    def __init__(self, target):
+        super(ContentLoss, self).__init__()
+        self.target = target.detach() #detach the target tensor to prevent gradient computation
+    def forward(self, input):
+        self.loss = nn.functional.mse_loss(input, self.target)
+        return input
+    
+class StyleLoss(nn.Module):
+    def __init__(self, target):
+        super(StyleLoss, self).__init__()
+        self.target = gram_matrix(target).detach() #detach the target tensor to prevent gradient computation
+    def forward(self, input):
+        g_mat = gram_matrix(input)
+        self.loss = nn.functional.mse_loss(g_mat, self.target)
+        return input
     
 def run_style_transfer(content_path, style_path, output_path, num_steps=300, content_weight=1, style_weight = 1e6):
     """
