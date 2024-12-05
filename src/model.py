@@ -52,7 +52,7 @@ class ModifiedVGG19(nn.Module):
     def __init__(self, content_img, style_img, content_layers, style_layers):
         super(ModifiedVGG19, self).__init__()
         #Load the pre-trained VGG-19 model
-        vgg = models.vgg19(pretrained=True).features.to(device).eval()
+        vgg = models.vgg19(weights=models.VGG19_Weights.DEFAULT).features.to(device).eval()
         self.model = nn.Sequential()
         self.content_losses = []
         self.style_losses = []
@@ -71,7 +71,6 @@ class ModifiedVGG19(nn.Module):
 
             #Add content loss layer
             if name in content_layers:
-                print(f"Adding content loss at layer {name}")
                 target = x_content.detach()
                 content_loss = ContentLoss(target) #We will set the target later
                 self.model.add_module(f"content_loss_{name}", content_loss)
@@ -79,7 +78,6 @@ class ModifiedVGG19(nn.Module):
             
             #Add style loss layer
             if name in style_layers:
-                print(f"Adding style loss at layer {name}")
                 target = x_style.detach()
                 style_loss = StyleLoss(target) #We will set the target later
                 self.model.add_module(f"style_loss_{name}", style_loss)
@@ -143,8 +141,6 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
     #Initialize the modified VGG-19 model using the defined content and style layers and images
     model = ModifiedVGG19(content_img, style_img, content_layers, style_layers).to(device)
 
-    print(model)
-
     #Define the optimizer
     optimizer = torch.optim.LBFGS([gen_img]) #using L-BFGS optimizer for optimization
 
@@ -165,7 +161,7 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
             #Log progress
             step_counter[0] += 1
             if step_counter[0] % 50 == 0:
-                print(f"Step [{step_counter[0]}/{num_steps}], Content Loss: {c_loss.item()}, Style Loss: {s_loss.item()}")
+                print(f"Step [{step_counter[0]}/{num_steps}], Content Loss: {c_loss.item():.4f}, Style Loss: {s_loss.item():.6f}")
             return total_loss
         optimizer.step(closure)
 
@@ -173,3 +169,5 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
     save_image(gen_img, output_path)
 
 run_style_transfer("tiger.jpg", "starry.jpg", "output.jpg")
+#run_style_transfer("barak.jpg", "monalisa.jpg", "output2.jpg")
+#run_style_transfer("dancing.jpg", "picasso.jpg", "output3.jpg")
