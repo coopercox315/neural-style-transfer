@@ -148,8 +148,11 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
     #Define the optimizer
     optimizer = torch.optim.LBFGS([gen_img]) #using L-BFGS optimizer for optimization
 
+    #mutable variable to keep track of the number of optimization steps
+    step_counter = [0]
+
     #Optimization loop 
-    for step in range(num_steps):
+    while step_counter[0] <= num_steps:
         def closure():
             optimizer.zero_grad()
             model(gen_img) #pass the generated/output image through the model
@@ -160,8 +163,9 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
             total_loss.backward()
 
             #Log progress
-            if step % 50 == 0:
-                print(f"Step [{step}/{num_steps}], Content Loss: {c_loss.item()}, Style Loss: {s_loss.item()}")
+            step_counter[0] += 1
+            if step_counter[0] % 50 == 0:
+                print(f"Step [{step_counter[0]}/{num_steps}], Content Loss: {c_loss.item()}, Style Loss: {s_loss.item()}")
             return total_loss
         optimizer.step(closure)
 
