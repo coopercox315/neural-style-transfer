@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #function to load and preprocess an image
-def load_image(img_path, max_size=400, shape=None):
+def load_image(img_path, max_size=512, shape=None):
     """
     Load and preprocess an image from a given path.
     Args:
