@@ -39,7 +39,7 @@ if st.button("Run Style Transfer"):
     else:
         st.error("Please upload both content and style images.")
 
-#Show the image and add a download button if the output exists
+#Show the image if it exists
 if st.session_state.output_image:
     st.image(st.session_state.output_image, caption="Generated Image", use_container_width=True)
 
