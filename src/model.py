@@ -4,7 +4,7 @@ import torchvision.transforms as T
 from torchvision import models
 from PIL import Image
 import numpy as np
-from preprocessing import load_image, to_numpy, display_images
+from src.preprocessing import load_image
 
 #Define device: Using GPU if available, otherwise CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -140,6 +140,7 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
 
     #Initialize the modified VGG-19 model using the defined content and style layers and images
     model = ModifiedVGG19(content_img, style_img, content_layers, style_layers).to(device)
+    model.eval()
 
     #Define the optimizer
     optimizer = torch.optim.LBFGS([gen_img]) #using L-BFGS optimizer for optimization
@@ -164,10 +165,14 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
                 print(f"Step [{step_counter[0]}/{num_steps}], Content Loss: {c_loss.item():.4f}, Style Loss: {s_loss.item():.6f}")
             return total_loss
         optimizer.step(closure)
+        if step_counter[0] <= num_steps:
+            progress = step_counter[0]/num_steps
+            yield progress
 
     #Save the generated image
     save_image(gen_img, output_path)
 
-run_style_transfer("tiger.jpg", "starry.jpg", "output.jpg")
+#run_style_transfer("tiger.jpg", "starry.jpg", "output.jpg")
 #run_style_transfer("barak.jpg", "monalisa.jpg", "output2.jpg")
 #run_style_transfer("dancing.jpg", "picasso.jpg", "output3.jpg")
+#run_style_transfer("river.jpg", "marg.jpg", "output4.jpg")
