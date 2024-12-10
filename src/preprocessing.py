@@ -18,19 +18,24 @@ def load_image(img_path, max_size=512, shape=None):
     """
     image = Image.open(img_path)
 
-    #Resize image if it exceeds the maximum size
-    if max(image.size) > max_size:
-        scale  = max_size / float(max(image.size))
-        new_size = (int(image.size[0] * scale), int(image.size[1] * scale))
+    #Resize image if it exceeds the maximum size and preserve aspect ratio of content image
+    if shape is None:
+        width, height = image.size
+        max_dim = max(width, height)
+        if max_dim > max_size:
+            scale = max_size / float(max_dim)
+            new_width = int(width * scale)
+            new_height = int(height * scale)
+            new_size = (new_height, new_width)  #T.Resize expects (H, W)
+        else:
+            new_size = (height, width)  #(H, W)
     else:
-        new_size = image.size
-
-    if shape is not None:
+        #shape is already (H, W)
         new_size = shape
 
     #Convert image to tensor and normalize
     transform = T.Compose([
-        T.Resize(new_size),
+        T.Resize(new_size, T.InterpolationMode.BICUBIC),
         T.ToTensor(),
         T.Normalize(mean=[0.485, 0.456, 0.406],
                     std=[0.229, 0.224, 0.225])
@@ -72,6 +77,6 @@ def display_images(content, style):
     ax2.imshow(to_numpy(style))
     plt.show()
 
-# content = load_image("tiger.jpg")
-# style = load_image("starry.jpg", shape=content.shape[-2:])
+# content = load_image("river.jpg")
+# style = load_image("marg.jpg", shape=content.shape[-2:])
 # display_images(content, style)
