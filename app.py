@@ -39,7 +39,6 @@ with st.sidebar:
         style_img = uploaded_style
         st.sidebar.image(style_img, caption="Uploaded Style Image", use_container_width=False)
     else:
-        # Use the streamlit-image-select for preset images
         style_img = image_select(
             label="or choose an example style image",
             images=[
@@ -63,8 +62,8 @@ if st.button("Run Style Transfer"):
         #Reset session state for output image
         st.session_state.output_image = None
 
-        #Create a progress bar
-        progress_bar = st.progress(0)  # Initialize progress bar
+        #Create a progress bar and initialize it
+        progress_bar = st.progress(0)
 
         #Run style transfer
         st.text("Running Style Transfer...")
