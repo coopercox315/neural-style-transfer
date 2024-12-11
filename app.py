@@ -9,6 +9,7 @@ content_img = st.sidebar.file_uploader("Choose a content image")
 style_img = st.sidebar.file_uploader("Choose a style image")
 steps = st.sidebar.slider("Number of optimization steps", 300, 900, 300, 100)
 style_weight = st.sidebar.slider("Style weight", 1e6, 1e7, 1e6, 1e6)
+max_size = st.sidebar.number_input("Maximum image size (pixels)", 128, 3840, 512, 64)
 
 if "output_image" not in st.session_state:
     st.session_state.output_image = None
@@ -29,7 +30,7 @@ if st.button("Run Style Transfer"):
         #Run style transfer
         st.text("Running Style Transfer...")
         output_path = "output.jpg"
-        for progress in run_style_transfer(content_img, style_img, output_path, num_steps=steps, style_weight=style_weight):
+        for progress in run_style_transfer(content_img, style_img, output_path, max_size, num_steps=steps, style_weight=style_weight):
             progress_bar.progress(progress)
 
         #Save output image in session state

@@ -113,7 +113,7 @@ def save_image(tensor, path):
     img = Image.fromarray(img)
     img.save(path)
 
-def run_style_transfer(content_path, style_path, output_path, num_steps=300, content_weight=1, style_weight = 1e6):
+def run_style_transfer(content_path, style_path, output_path, max_size=512, num_steps=300, content_weight=1, style_weight = 1e6):
     """
     Run the style transfer process with the given content and style images.
     The ratio of content_weight to style_weight determines the balance between
@@ -128,8 +128,8 @@ def run_style_transfer(content_path, style_path, output_path, num_steps=300, con
     """
 
     #load content and style images
-    content_img = load_image(content_path).to(device)
-    style_img = load_image(style_path, shape=content_img.shape[-2:]).to(device)
+    content_img = load_image(content_path, max_size=max_size).to(device)
+    style_img = load_image(style_path, max_size=max_size, shape=content_img.shape[-2:]).to(device)
 
     #Initialize the output image as the content image
     gen_img = content_img.clone().requires_grad_(True).to(device)
