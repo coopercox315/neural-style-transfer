@@ -4,6 +4,23 @@ from src.model import run_style_transfer
 from streamlit_image_select import image_select
 
 st.title("Neural Style Transfer")
+st.markdown(
+    """
+    Transform your images into works of art using the power of neural style transfer!\n
+    This program takes two separate images, blending the artistic style of one with the content of the other
+    using the power of deep learning.\n
+    - Upload your own **content image** (the subject) and **style image** (the desrired artistic appearance) or select 
+    from the examples provided.\n
+    - Adjust the parameters to customize the output:\n
+        - **Number of optimization steps:** Increasing the steps often refines the final image further, but may lead to diminishing 
+        returns beyond a certain point. More steps also increases computation time.\n
+        - **Style weight:** Increase or decrease the emphasis on the style applied.\n
+        - **Maximum image size:** Control the resolution of the output image (larger sizes require more computation).\n
+    - Click the 'Run Style Transfer' button below to generate your stylized image.\n
+    **Note:** Performance may vary depending on hardware. Running on a GPU accelerates the process significantly, while 
+    CPU execution is slower but accessible on most systems.  
+    """
+)
 
 #Sidebar inputs
 #Content image selection
