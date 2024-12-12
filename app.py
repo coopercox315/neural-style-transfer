@@ -22,8 +22,10 @@ with st.sidebar:
             images=[
                 "examples/content/dancing.jpg",
                 "examples/content/tiger.jpg",
+                "examples/content/neckarfront.jpg",
+                "examples/content/mountains.jpeg",
             ],
-            captions=["Dancing", "Tiger"],
+            captions=["Dancing", "Tiger", "Neckarfront", "Mountains"],
             use_container_width=False
         )
 
@@ -44,18 +46,20 @@ with st.sidebar:
             images=[
                 "examples/style/picasso.jpg",
                 "examples/style/starry.jpg",
+                "examples/style/shipwreck.jpg",
+                "examples/style/abstractswirls.jpeg",
             ],
-            captions=["Picasso", "Starry Night"],
+            captions=["Picasso", "Starry Night", "Shipwreck", "Abstract Swirls"],
             use_container_width=False
         )
         
-steps = st.sidebar.slider("Number of optimization steps", 300, 900, 300, 100)
+steps = st.sidebar.slider("Number of optimization steps", 300, 2000, 300, 100)
 style_weight = st.sidebar.slider("Style weight", 1e6, 1e7, 1e6, 1e6)
-max_size = st.sidebar.number_input("Maximum image size (pixels)", 128, 3840, 512, 64)
+max_size = st.sidebar.number_input("Maximum image size (pixels)", 128, 2160, 512, 64)
 
 if "output_image" not in st.session_state:
     st.session_state.output_image = None
-
+    
 #Main content
 if st.button("Run Style Transfer"):
     if content_img and style_img:
@@ -74,10 +78,53 @@ if st.button("Run Style Transfer"):
         #Save output image in session state
         with open(output_path, "rb") as f:
             st.session_state.output_image = f.read()
-            
     else:
         st.error("Please upload both content and style images.")
 
 #Show the image if it exists
 if st.session_state.output_image:
     st.image(st.session_state.output_image, caption="Generated Image", use_container_width=True)
+
+#Example outputs
+example_container = st.container()
+with example_container:
+    st.subheader("Output Examples")
+    example1 = st.columns(3, vertical_alignment="bottom")
+    with example1[0]:
+        st.image("examples/content/tiger.jpg", caption="Content Image", use_container_width=True)
+    with example1[1]:
+        st.image("examples/style/starry.jpg", caption="Style Image", use_container_width=True)
+    with example1[2]:
+        st.image("examples/output/tiger_starry.jpg", caption="Generated Image", use_container_width=True)
+
+    example2 = st.columns(3, vertical_alignment="bottom")
+    with example2[0]:
+        st.image("examples/content/cityscape.jpeg", caption="Content Image", use_container_width=True)
+    with example2[1]:
+        st.image("examples/style/compositionvii.jpg", caption="Style Image", use_container_width=True)
+    with example2[2]:
+        st.image("examples/output/cityscape_composition.jpg", caption="Generated Image", use_container_width=True)
+
+    example3 = st.columns(3, vertical_alignment="bottom")
+    with example3[0]:
+        st.image("examples/content/neckarfront.jpg", caption="Content Image", use_container_width=True)
+    with example3[1]:
+        st.image("examples/style/shipwreck.jpg", caption="Style Image", use_container_width=True)
+    with example3[2]:
+        st.image("examples/output/neckarfront_shipwreck.jpg", caption="Generated Image", use_container_width=True)
+
+    example4 = st.columns(3, vertical_alignment="bottom")
+    with example4[0]:
+        st.image("examples/content/bwportrait.jpg", caption="Content Image", use_container_width=True)
+    with example4[1]:
+        st.image("examples/style/abstractswirls.jpeg", caption="Style Image", use_container_width=True)
+    with example4[2]:
+        st.image("examples/output/bwportrait_swirls.jpg", caption="Generated Image", use_container_width=True)
+
+    example5 = st.columns(3, vertical_alignment="bottom")
+    with example5[0]:
+        st.image("examples/content/mountains.jpeg", caption="Content Image", use_container_width=True)
+    with example5[1]:
+        st.image("examples/style/waterlillies.jpg", caption="Style Image", use_container_width=True)
+    with example5[2]:
+        st.image("examples/output/mountain_lillies.jpg", caption="Generated Image", use_container_width=True)
