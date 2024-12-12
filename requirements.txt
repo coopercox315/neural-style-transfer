@@ -1,0 +1,7 @@
+matplotlib
+numpy
+Pillow>=10.0.1
+streamlit>=1.40.2
+streamlit_image_select>=0.6.0
+torch>=2.5.1
+torchvision>=0.20.1
