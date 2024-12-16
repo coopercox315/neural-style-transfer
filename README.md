@@ -20,8 +20,11 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
    - **Shallow Layers**: Used for extracting low-level features such as edges, textures, and colors.
    - **Deeper Layers**: Used for extracting high-level features such as shapes and the overall structure of objects in the image.
 
+   Below is the model architecture used in this project, highlighting the layers chosen for content and style extraction:
+   ![CNN](https://github.com/user-attachments/assets/e3260255-c648-453a-8835-658c4fa621ab)
+
    In my implementation, the **ModifiedVGG19** class wraps the original VGG19 model and inserts **custom layers** (e.g., `ContentLoss` and `StyleLoss`) at specific points in the architecture.
-4. **Defining Content and Style Representations**
+5. **Defining Content and Style Representations**
 
    **Content Representation**
      - The **content** of an image is extracted from a deeper layer of the CNN (e.g., `conv4_2` in VGG19).
@@ -32,7 +35,11 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
     - The **style** of an image is captured using **Gram matrices**, which represent the correlation between different feature maps at each layer.
     - These correlations encode patterns, textures, and artistic styles, such as brush strokes or color palettes.
     - The `StyleLoss` layer compares the Gram matrices of the generated image and the style image, using MSE to match the style features.
-5. **Modifying the VGG19 Model**: Instead of a simple function-based approach like other NST repos, my approach uses a **class-based design** for modularity and clarity. The `ModifiedVGG19` class:
+  
+   The diagram below shows **feature maps** extracted at different layers of the VGG19 network when processing the two images from the previous diagram (**Tiger** as the content image, **Starry Night** as the style image):
+   ![Feature_maps](https://github.com/user-attachments/assets/6f577bab-510f-4857-9090-d0c7dd15310a)
+
+7. **Modifying the VGG19 Model**: Instead of a simple function-based approach like other NST repos, my approach uses a **class-based design** for modularity and clarity. The `ModifiedVGG19` class:
    - Wraps the pretrained VGG19 model.
    - Iteratively inserts custom `ContentLoss` and `StyleLoss` layers at specified points during the network.
    - After adding the loss layers, the model stops further processing to save computation.
@@ -49,7 +56,7 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
    The setup used for this implementation placed content and style layers at the following points:
    - **Content Layers**: `conv4_2` (layer `21` in VGG19 model)
    - **Style Layers**: `conv1_1`, `conv2_1`, `conv3_1`, `conv4_1` and `conv5_1` (layers `0`, `5`, `10`, `19` and `28`)
-6. **Optimizing the Output Image**: The NST process treats image generation as an optimization problem:
+8. **Optimizing the Output Image**: The NST process treats image generation as an optimization problem:
     1. **Initialization**:
        - The generated image starts as a copy of the content image
     2. **Loss Function**:
