@@ -108,3 +108,65 @@ The following examples showcase output images generated using only the code impl
    ```
       pip install -r requirements.txt
    ```
+
+## Usage
+
+There are multiple different ways to use this project.
+
+### Use the Streamlit app
+The Streamlit app provides an intuitive web interface for running NST. With this app you can upload content and style images (or choose from the provided examples), customize parameters, and generate stylized images in just a few steps.
+
+**How to launch the app**
+1. Ensure you have all dependencies installed (See **Setup/Installation** above).
+2. Run the following command to start the Streamlit app:
+   ```
+      streamlit run app.py
+   ```
+3. The app should automatically open within your default browser. If not, simply navigate to `http://localhost:8501` within your browser to access the app.
+
+Below is a preview of the app interface upon opening, with detailed usage instructions provided in the app itself:
+![Streamlit app](https://github.com/coopercox315/neural-style-transfer/blob/main/examples/streamlit_app.png?raw=true)
+
+### Run as a CLI tool
+
+If you prefer a more hands-on approach, you can run NST directly from the command line. This option provides slightly more customization than the Streamlit app as there are no parameter limits set. 
+
+**How to run via CLI**
+1. Ensure you have all dependencies installed (See **Setup/Installation** above).
+2. Execute the model script with arguments
+
+   Invoke the `src/model.py` script, along with the required and optional arguments directly from your terminal or command prompt. Below is an example command and a description of each available argument:
+   ```
+      python src/model.py --content examples/content/tiger.jpg --style examples/style/starry.jpg --output output.jpg --max_size 512 --steps 300 --content_weight 1 --style_weight 1000000
+   ```
+   **Required Arguments**:
+   - `--content`: Path to the content image (must be .jpg or .png).
+
+     Example: `--content examples/content/tiger.jpg`
+   
+   - `--style`: Path to the style image (must be .jpg or .png).
+
+     Example: `--style examples/style/starry.jpg`
+
+   **Optional Arguments**:
+   - `--output`: The file path where the generated image will be saved. Default is `output.jpg`.
+
+     Example: `--output tiger_starry.jpg`
+
+   - `--max_size`: The maximum dimension (in pixels) to which both the content and style images will be resized, preserving aspect ratio. Larger sizes can produce more detailed images but increase computation time. Default is `512`.
+
+     Example: `--max_size 640`
+
+    - `--steps`: Number of optimization steps. Increasing the steps often refines the final image further, but may lead to diminishing returns beyond a certain point. More steps also increases computation time. Default is `300`.
+
+      Example: `--steps 600`
+
+    - `--content_weight`: Weight given to content preservation. Typically left at `1`. Increasing this value will emphasize the content's structure. Default is `1`.
+
+      Example: `--content_weight 1`
+
+   - `--style_weight`: Weight given to applying the style features. Larger values increase the stylization strength. Default is `1e6` (1000000).
+
+      Example: `--style_weight 10000000`
+
+After running the command, the stylized image will be generated and saved to the specified `--output` location (or `output.jpg` if not specified).
