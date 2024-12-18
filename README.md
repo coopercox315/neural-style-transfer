@@ -71,4 +71,26 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
        - Using the **L-BFGS optimizer**, the generated image is updated iteratively to minimize the total loss.
        - Custom `closure()` function ensures the losses are recalculated and backpropagated for each step.
            
-   
+## Examples
+The following examples showcase output images generated using only the code implemented in this repo. Each result combines the content of one image with the artistic style of another, highlighting the power of NST as executed by this project.
+
+<div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/tiger.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/starry.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/tiger_starry.jpg?raw=true" width=33%>
+</div>
+<div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/cityscape.jpeg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/compositionvii.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/cityscape_composition.jpg?raw=true" width=33%>
+</div>
+<div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/neckarfront.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/shipwreck.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/neckarfront_shipwreck.jpg?raw=true" width=33%>
+</div>
+<div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/bwportrait.jpg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/abstractswirls.jpeg?raw=true" width=33%>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/bwportrait_swirls.jpg?raw=true" width=33%>
+</div>
