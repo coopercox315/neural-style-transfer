@@ -93,3 +93,18 @@ The following examples showcase output images generated using only the code impl
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/abstractswirls.jpeg?raw=true" width=265px>
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/bwportrait_swirls.jpg?raw=true" width=265px>
 </div>
+
+## Setup/Installation
+1. **Clone the repository and navigate to the downloaded folder**
+   ```
+      git clone https://github.com/coopercox315/neural-style-transfer.git
+   ```
+   ```
+      cd neural-style-transfer
+   ```
+3. **Install Dependencies**
+
+   Use the provided `requirements.txt` to setup the project environment:
+   ```
+      pip install -r requirements.txt
+   ```
