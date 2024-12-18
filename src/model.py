@@ -4,7 +4,7 @@ import torchvision.transforms as T
 from torchvision import models
 from PIL import Image
 import numpy as np
-from src.preprocessing import load_image
+import argparse
 
 #Define device: Using GPU if available, otherwise CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -94,6 +94,47 @@ class ModifiedVGG19(nn.Module):
     def forward(self, x):
         return self.model(x)
     
+#function to load and preprocess an image
+def load_image(img_path, max_size=512, shape=None):
+    """
+    Load and preprocess an image from a given path.
+    Args:
+    - img_path (str): path to the image file.
+    - max_size (int): the maximum size for resizing the image.
+    - shape (tuple): the shape to resize the image to. Input content image shape when loading style image.
+    
+    Returns:
+    - Tensor: a tensor representing the preprocessed image.
+    """
+    image = Image.open(img_path)
+
+    #Resize image if it exceeds the maximum size and preserve aspect ratio of content image
+    if shape is None:
+        width, height = image.size
+        max_dim = max(width, height)
+        if max_dim > max_size:
+            scale = max_size / float(max_dim)
+            new_width = int(width * scale)
+            new_height = int(height * scale)
+            new_size = (new_height, new_width)  #T.Resize expects (H, W)
+        else:
+            new_size = (height, width)  #(H, W)
+    else:
+        #shape is already (H, W)
+        new_size = shape
+
+    #Convert image to tensor and normalize
+    transform = T.Compose([
+        T.Resize(new_size, T.InterpolationMode.BICUBIC),
+        T.ToTensor(),
+        T.Normalize(mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225])
+    ])
+
+    # Add batch dimension for compatibility with model
+    image = transform(image).unsqueeze(0)
+    return image
+    
 #define function to save the generated image
 def save_image(tensor, path):
     """
@@ -113,7 +154,7 @@ def save_image(tensor, path):
     img = Image.fromarray(img)
     img.save(path)
 
-def run_style_transfer(content_path, style_path, output_path, max_size=512, num_steps=300, content_weight=1, style_weight = 1e6):
+def run_style_transfer(content_path, style_path, output_path, max_size=512, num_steps=300, content_weight=1, style_weight = 1e6, progress_callback=None):
     """
     Run the style transfer process with the given content and style images.
     The ratio of content_weight to style_weight determines the balance between
@@ -165,14 +206,25 @@ def run_style_transfer(content_path, style_path, output_path, max_size=512, num_
                 print(f"Step [{step_counter[0]}/{num_steps}], Content Loss: {c_loss.item():.4f}, Style Loss: {s_loss.item():.6f}")
             return total_loss
         optimizer.step(closure)
-        if step_counter[0] <= num_steps:
+        if progress_callback and step_counter[0] <= num_steps:
             progress = step_counter[0]/num_steps
-            yield progress
+            progress_callback(progress)
 
     #Save the generated image
     save_image(gen_img, output_path)
 
-#run_style_transfer("tiger.jpg", "starry.jpg", "output.jpg")
-#run_style_transfer("barak.jpg", "monalisa.jpg", "output2.jpg")
-#run_style_transfer("dancing.jpg", "picasso.jpg", "output3.jpg")
-#run_style_transfer("river.jpg", "marg.jpg", "output4.jpg")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run Neural Style Transfer")
+    parser.add_argument("--content", type=str, required=True, help="Path to the content image.")
+    parser.add_argument("--style", type=str, required=True, help="Path to the style image.")
+    parser.add_argument("--output", type=str, default="output.jpg", help="Path to save the output image.")
+    parser.add_argument("--max_size", type=int, default=512, help="Maximum size for the content and style images.")
+    parser.add_argument("--steps", type=int, default=300, help="Number of optimization steps.")
+    parser.add_argument("--content_weight", type=int, default=1, help="Weight for the content loss.")
+    parser.add_argument("--style_weight", type=int, default=1e6, help="Weight for the style loss.")
+
+    args = parser.parse_args()
+
+    #Run style transfer with the provided arguments
+    run_style_transfer(args.content, args.style, args.output, args.max_size, args.steps, args.content_weight, args.style_weight)
