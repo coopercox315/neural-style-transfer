@@ -111,7 +111,7 @@ The following examples showcase output images generated using only the code impl
 
 ## Usage
 
-There are multiple different ways to use this project.
+This project offers multiple different ways to interact with it and run Neural Style Transfer. Choose the Streamlit app for a user-friendly, graphical interface, or opt for the command-line tool to gain finer control over parameters and integrate NST into larger workflows.
 
 ### Use the Streamlit app
 The Streamlit app provides an intuitive web interface for running NST. With this app you can upload content and style images (or choose from the provided examples), customize parameters, and generate stylized images in just a few steps.
