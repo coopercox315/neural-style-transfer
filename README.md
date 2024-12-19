@@ -1,7 +1,7 @@
 # neural-style-transfer
 Neural Style Transfer (NST) is a deep learning technique that effectively merges the content of one image with the artistic style of another, creating a new stylized image. It leverages convolutional neural networks (CNNs) to extract and manipulate features from the style image and transfer them across to the content image, allowing users to take any image and turn it into a newly generated art piece.
 
-This repo contains a PyTorch implementation of 'Image Style Transfer' as discusssed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
+This repo contains a PyTorch implementation of 'Image Style Transfer using Convolutional Neural Networks' as discusssed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
 
 ## How it works
 Neural Style Transfer relies on CNNs to seperate and recombine the **content** and **style** of images, creating visually impressive results. This project implements NST using a modified VGG19 model, organized in a class-based structure for greater flexibility and modularity. The process itself involves the following key steps:
@@ -170,3 +170,12 @@ If you prefer a more hands-on approach, you can run NST directly from the comman
       Example: `--style_weight 10000000`
 
 After running the command, the stylized image will be generated and saved to the specified `--output` location (or `output.jpg` if not specified).
+
+## Acknowledgements
+The following sources were useful during the development of this project:
+
+- The original paper on Neural Style Transfer (NST) by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
+- The PyTorch tutorial on NST, written by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html)
+- This medium article on [Neural Style Transfer (VGG19)](https://medium.com/software-dev-explore/neural-style-transfer-vgg19-dab643ec6160)
+- This GeeksforGeeks article on [VGG-Net Architecture](https://www.geeksforgeeks.org/vgg-net-architecture-explained/)
+- This image select component for Streamlit by [Johannes Rieke](https://github.com/jrieke/streamlit-image-select)
