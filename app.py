@@ -1,5 +1,4 @@
 import streamlit as st
-from src.preprocessing import load_image
 from src.model import run_style_transfer
 from streamlit_image_select import image_select
 
@@ -76,6 +75,10 @@ max_size = st.sidebar.number_input("Maximum image size (pixels)", 128, 2160, 512
 
 if "output_image" not in st.session_state:
     st.session_state.output_image = None
+
+#function to update progress bar
+def update_progress(progress):
+    progress_bar.progress(progress)
     
 #Main content
 if st.button("Run Style Transfer"):
@@ -89,8 +92,7 @@ if st.button("Run Style Transfer"):
         #Run style transfer
         st.text("Running Style Transfer...")
         output_path = "output.jpg"
-        for progress in run_style_transfer(content_img, style_img, output_path, max_size, num_steps=steps, style_weight=style_weight):
-            progress_bar.progress(progress)
+        run_style_transfer(content_img, style_img, output_path, max_size, num_steps=steps, style_weight=style_weight, progress_callback=update_progress)
 
         #Save output image in session state
         with open(output_path, "rb") as f:
