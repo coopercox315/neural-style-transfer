@@ -109,6 +109,8 @@ The following examples showcase output images generated using only the code impl
       pip install -r requirements.txt
    ```
 
+**Note**: This project is optized for GPU acceleration using **CUDA 12.4**. If you have a compatible GPU, ensure that both the CUDA toolkit and PyTorch with CUDA support are installed. 
+While CUDA is optional, it is highly recommended as processing times can be significantly reduced compared to running on a CPU.
 ## Usage
 
 This project offers multiple different ways to interact with it and run Neural Style Transfer. Choose the Streamlit app for a user-friendly, graphical interface, or opt for the command-line tool to gain finer control over parameters and integrate NST into larger workflows.
