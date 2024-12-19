@@ -129,7 +129,7 @@ Below is a preview of the app interface upon opening, with detailed usage instru
 
 ### Run as a CLI tool
 
-If you prefer a more hands-on approach, you can run NST directly from the command line. This option provides slightly more customization than the Streamlit app as there are no parameter limits set. 
+For users seeking precise control over the style transfer process, you can run NST directly from the command line. This option provides slightly more customization than the Streamlit app as there are no parameter limits set. 
 
 **How to run via CLI**
 1. Ensure you have all dependencies installed (See **Setup/Installation** above).
