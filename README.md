@@ -1,4 +1,4 @@
-# neural-style-transfer
+# Neural Style Transfer 🌆🎨
 Neural Style Transfer (NST) is a deep learning technique that effectively merges the content of one image with the artistic style of another, creating a new stylized image. It leverages convolutional neural networks (CNNs) to extract and manipulate features from the style image and transfer them across to the content image, allowing users to take any image and turn it into a newly generated art piece.
 
 This repo contains a PyTorch implementation of 'Image Style Transfer using Convolutional Neural Networks' as discusssed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
