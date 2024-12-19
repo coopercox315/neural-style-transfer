@@ -179,3 +179,6 @@ The following sources were useful during the development of this project:
 - This medium article on [Neural Style Transfer (VGG19)](https://medium.com/software-dev-explore/neural-style-transfer-vgg19-dab643ec6160)
 - This GeeksforGeeks article on [VGG-Net Architecture](https://www.geeksforgeeks.org/vgg-net-architecture-explained/)
 - This image select component for Streamlit by [Johannes Rieke](https://github.com/jrieke/streamlit-image-select)
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/coopercox315/neural-style-transfer/blob/main/LICENSE)
