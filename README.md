@@ -1,10 +1,10 @@
 # Neural Style Transfer 🌆🎨
 Neural Style Transfer (NST) is a deep learning technique that effectively merges the content of one image with the artistic style of another, creating a new stylized image. It leverages convolutional neural networks (CNNs) to extract and manipulate features from the style image and transfer them across to the content image, allowing users to take any image and turn it into a newly generated art piece.
 
-This repo contains a PyTorch implementation of 'Image Style Transfer using Convolutional Neural Networks' as discusssed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
+This repo contains a PyTorch implementation of 'Image Style Transfer using Convolutional Neural Networks' as discussed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
 
 ## How it works
-Neural Style Transfer relies on CNNs to seperate and recombine the **content** and **style** of images, creating visually impressive results. This project implements NST using a modified VGG19 model, organized in a class-based structure for greater flexibility and modularity. The process itself involves the following key steps:
+Neural Style Transfer relies on CNNs to separate and recombine the **content** and **style** of images, creating visually impressive results. This project implements NST using a modified VGG19 model, organized in a class-based structure for greater flexibility and modularity. The process itself involves the following key steps:
 1. **Image loading and preprocessing**: before the NST process begins, the input images (content and style) must be prepared for the model. This involves resizing, normalizing and converting them into a format that is compatible with the model (tensor).
    - **Image Resizing**:
      - The input images are resized to a maximum size specified by the user (e.g., 512). This ensures consistency and reduces the computational load for large images.
@@ -49,7 +49,7 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
    The class structure includes benefits such as:
    - Better layer management.
    - Being able to reuse losses during optimization.
-   - Modular design, keeping NST pipeline (loading images, running style transfer, saving output) clean and seperate from the VGG19 modifications
+   - Modular design, keeping NST pipeline (loading images, running style transfer, saving output) clean and separate from the VGG19 modifications
    - Readability, as all logic related to modifying the model and inserting layers is within this one class.
    - Scalability, architectures can be switched within the class without having to disrupt the overall NST pipeline
   
@@ -109,7 +109,7 @@ The following examples showcase output images generated using only the code impl
       pip install -r requirements.txt
    ```
 
-**Note**: This project is optized for GPU acceleration using **CUDA 12.4**. If you have a compatible GPU, ensure that both the CUDA toolkit and PyTorch with CUDA support are installed. 
+**Note**: This project is optimized for GPU acceleration using **CUDA 12.4**. If you have a compatible GPU, ensure that both the CUDA toolkit and PyTorch with CUDA support are installed. 
 While CUDA is optional, it is highly recommended as processing times can be significantly reduced compared to running on a CPU.
 ## Usage
 
