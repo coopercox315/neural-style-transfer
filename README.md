@@ -84,9 +84,9 @@ The following examples showcase output images generated using only the code impl
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/cityscape_composition.jpg?raw=true" width=265px>
 </div>
 <div align="center">
-   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/neckarfront.jpg?raw=true" width=265px>
-   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/shipwreck.jpg?raw=true" width=265px>
-   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/neckarfront_shipwreck.jpg?raw=true" width=265px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/ocean.jpg?raw=true" width=265px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/abstract2.jpg?raw=true" width=265px height=230px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/ocean_abstract.jpg?raw=true" width=265px>
 </div>
 <div align="center">
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/bwportrait.jpg?raw=true" width=265px>
