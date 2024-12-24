@@ -89,6 +89,11 @@ The following examples showcase output images generated using only the code impl
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/ocean_abstract.jpg?raw=true" width=265px>
 </div>
 <div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/goldengate.jpg?raw=true" width=265px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/hokusai.jpg?raw=true" width=265px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/goldengate_hokusai.jpg?raw=true" width=265px>
+</div>
+<div align="center">
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/bwportrait.jpg?raw=true" width=265px>
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/style/abstractswirls.jpeg?raw=true" width=265px>
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/bwportrait_swirls.jpg?raw=true" width=265px>
