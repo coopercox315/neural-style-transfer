@@ -1,10 +1,10 @@
-# neural-style-transfer
-Neural Style Tranfer (NST) is a deep learning technique that effectively merges the content of one image with the artistic style of another, creating a new stylized image. It leverages convolutional neural networks (CNNs) to extract and manipulate features from the style image and transfer them across to the content image, allowing users to take any image and turn it into a newly generated art piece.
+# Neural Style Transfer 🌆🎨
+Neural Style Transfer (NST) is a deep learning technique that effectively merges the content of one image with the artistic style of another, creating a new stylized image. It leverages convolutional neural networks (CNNs) to extract and manipulate features from the style image and transfer them across to the content image, allowing users to take any image and turn it into a newly generated art piece.
 
-This repo contains a PyTorch implementation of 'Image Style Transfer' as discusssed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
+This repo contains a PyTorch implementation of 'Image Style Transfer using Convolutional Neural Networks' as discussed in the original paper by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) The PyTorch implementation by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html) was also referenced during the creation of this version.
 
 ## How it works
-Neural Style Transfer relies on CNNs to seperate and recombine the **content** and **style** of images, creating visually impressive results. This project implements NST using a modified VGG19 model, organized in a class-based structure for greater flexibility and modularity. The process itself involves the following key steps:
+Neural Style Transfer relies on CNNs to separate and recombine the **content** and **style** of images, creating visually impressive results. This project implements NST using a modified VGG19 model, organized in a class-based structure for greater flexibility and modularity. The process itself involves the following key steps:
 1. **Image loading and preprocessing**: before the NST process begins, the input images (content and style) must be prepared for the model. This involves resizing, normalizing and converting them into a format that is compatible with the model (tensor).
    - **Image Resizing**:
      - The input images are resized to a maximum size specified by the user (e.g., 512). This ensures consistency and reduces the computational load for large images.
@@ -49,7 +49,7 @@ Neural Style Transfer relies on CNNs to seperate and recombine the **content** a
    The class structure includes benefits such as:
    - Better layer management.
    - Being able to reuse losses during optimization.
-   - Modular design, keeping NST pipeline (loading images, running style transfer, saving output) clean and seperate from the VGG19 modifications
+   - Modular design, keeping NST pipeline (loading images, running style transfer, saving output) clean and separate from the VGG19 modifications
    - Readability, as all logic related to modifying the model and inserting layers is within this one class.
    - Scalability, architectures can be switched within the class without having to disrupt the overall NST pipeline
   
@@ -108,3 +108,79 @@ The following examples showcase output images generated using only the code impl
    ```
       pip install -r requirements.txt
    ```
+
+**Note**: This project is optimized for GPU acceleration using **CUDA 12.4**. If you have a compatible GPU, ensure that both the CUDA toolkit and PyTorch with CUDA support are installed. 
+While CUDA is optional, it is highly recommended as processing times can be significantly reduced compared to running on a CPU.
+## Usage
+
+This project offers multiple different ways to interact with it and run Neural Style Transfer. Choose the Streamlit app for a user-friendly, graphical interface, or opt for the command-line tool to gain finer control over parameters and integrate NST into larger workflows.
+
+### Use the Streamlit app
+The Streamlit app provides an intuitive web interface for running NST. With this app you can upload content and style images (or choose from the provided examples), customize parameters, and generate stylized images in just a few steps.
+
+**How to launch the app**
+1. Ensure you have all dependencies installed (See **Setup/Installation** above).
+2. Run the following command to start the Streamlit app:
+   ```
+      streamlit run app.py
+   ```
+3. The app should automatically open within your default browser. If not, simply navigate to `http://localhost:8501` within your browser to access the app.
+
+Below is a preview of the app interface upon opening, with detailed usage instructions provided in the app itself:
+![Streamlit app](https://github.com/coopercox315/neural-style-transfer/blob/main/examples/streamlit_app.png?raw=true)
+
+### Run as a CLI tool
+
+For users seeking precise control over the style transfer process, you can run NST directly from the command line. This option provides slightly more customization than the Streamlit app as there are no parameter limits set. 
+
+**How to run via CLI**
+1. Ensure you have all dependencies installed (See **Setup/Installation** above).
+2. Execute the model script with arguments
+
+   Invoke the `src/model.py` script, along with the required and optional arguments directly from your terminal or command prompt. Below is an example command and a description of each available argument:
+   ```
+      python src/model.py --content examples/content/tiger.jpg --style examples/style/starry.jpg --output output.jpg --max_size 512 --steps 300 --content_weight 1 --style_weight 1000000
+   ```
+   **Required Arguments**:
+   - `--content`: Path to the content image (must be .jpg or .png).
+
+     Example: `--content examples/content/tiger.jpg`
+   
+   - `--style`: Path to the style image (must be .jpg or .png).
+
+     Example: `--style examples/style/starry.jpg`
+
+   **Optional Arguments**:
+   - `--output`: The file path where the generated image will be saved. Default is `output.jpg`.
+
+     Example: `--output tiger_starry.jpg`
+
+   - `--max_size`: The maximum dimension (in pixels) to which both the content and style images will be resized, preserving aspect ratio. Larger sizes can produce more detailed images but increase computation time. Default is `512`.
+
+     Example: `--max_size 640`
+
+    - `--steps`: Number of optimization steps. Increasing the steps often refines the final image further, but may lead to diminishing returns beyond a certain point. More steps also increases computation time. Default is `300`.
+
+      Example: `--steps 600`
+
+    - `--content_weight`: Weight given to content preservation. Typically left at `1`. Increasing this value will emphasize the content's structure. Default is `1`.
+
+      Example: `--content_weight 1`
+
+   - `--style_weight`: Weight given to applying the style features. Larger values increase the stylization strength. Default is `1e6` (1000000).
+
+      Example: `--style_weight 10000000`
+
+After running the command, the stylized image will be generated and saved to the specified `--output` location (or `output.jpg` if not specified).
+
+## Acknowledgements
+The following sources were useful during the development of this project:
+
+- The original paper on Neural Style Transfer (NST) by [Gatys et al.](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
+- The PyTorch tutorial on NST, written by [Alexis Jacq](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html)
+- This medium article on [Neural Style Transfer (VGG19)](https://medium.com/software-dev-explore/neural-style-transfer-vgg19-dab643ec6160)
+- This GeeksforGeeks article on [VGG-Net Architecture](https://www.geeksforgeeks.org/vgg-net-architecture-explained/)
+- This image select component for Streamlit by [Johannes Rieke](https://github.com/jrieke/streamlit-image-select)
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/coopercox315/neural-style-transfer/blob/main/LICENSE)
