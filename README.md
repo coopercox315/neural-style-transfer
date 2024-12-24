@@ -94,6 +94,18 @@ The following examples showcase output images generated using only the code impl
    <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/bwportrait_swirls.jpg?raw=true" width=265px>
 </div>
 
+### Figure 3 Reconstruction
+I also reproduced the **Figure 3 examples** from the the [original paper](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf), which applies famous art styles to a photograph of the Neckarfront in Tübingen, Germany. These examples highlight the versatility of NST in blending various artistic styles with the same content image.
+
+<div align="center">
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/content/neckarfront.jpg?raw=true" width=330px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/figure3_reconstruction/shipwreck_neckarfront_1152_1e7style.jpg?raw=true" width=330px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/figure3_reconstruction/starry_neckarfront_640_1e7style.jpg?raw=true" width=330px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/figure3_reconstruction/scream_neckarfront_1152_1e7style.jpg?raw=true" width=330px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/figure3_reconstruction/picasso_neckarfront_640_1e7style.jpg?raw=true" width=330px>
+   <img src="https://github.com/coopercox315/neural-style-transfer/blob/main/examples/output/figure3_reconstruction/compositionvii_neckarfront_1152_1e7style.jpg?raw=true" width=330px>
+</div>
+
 ## Setup/Installation
 1. **Clone the repository and navigate to the downloaded folder**
    ```
